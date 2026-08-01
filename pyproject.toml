@@ -1,0 +1,14 @@
+[project]
+name = "lab-1-backend"
+version = "0.1.0"
+description = "Search algorithms for Vietnamese traffic route optimization"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110,<1.0",
+    "httpx>=0.27,<1.0",
+    "pydantic>=2.7,<3.0",
+    "uvicorn[standard]>=0.27,<1.0",
+]
+
+[tool.setuptools]
+packages = ["algorithms", "app", "core"]

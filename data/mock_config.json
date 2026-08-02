@@ -1,0 +1,9 @@
+{
+  "cost_weights": {
+    "alpha_distance": 1.0,
+    "beta_time": 0.5,
+    "gamma_congestion": 2.0,
+    "delta_risk": 1.0
+  },
+  "description": "Demo-only weights; the group must agree on final calibrated values."
+}

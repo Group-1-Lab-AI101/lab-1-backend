@@ -1,0 +1,194 @@
+[
+  {
+    "id": "ben_thanh_market",
+    "name": "Chợ Bến Thành",
+    "category": "market",
+    "description": "Biểu tượng thương mại lâu đời ở trung tâm Thành phố Hồ Chí Minh.",
+    "latitude": 10.7725,
+    "longitude": 106.698
+  },
+  {
+    "id": "independence_palace",
+    "name": "Dinh Độc Lập",
+    "category": "historic",
+    "description": "Di tích lịch sử và kiến trúc tiêu biểu của thành phố.",
+    "latitude": 10.777,
+    "longitude": 106.6953
+  },
+  {
+    "id": "war_remnants_museum",
+    "name": "Bảo tàng Chứng tích Chiến tranh",
+    "category": "museum",
+    "description": "Bảo tàng lịch sử nổi bật trên đường Võ Văn Tần.",
+    "latitude": 10.7795,
+    "longitude": 106.692
+  },
+  {
+    "id": "notre_dame_cathedral",
+    "name": "Nhà thờ Đức Bà",
+    "category": "architecture",
+    "description": "Công trình kiến trúc tôn giáo tại Công trường Công xã Paris.",
+    "latitude": 10.7798,
+    "longitude": 106.699
+  },
+  {
+    "id": "central_post_office",
+    "name": "Bưu điện Trung tâm",
+    "category": "architecture",
+    "description": "Công trình bưu điện lịch sử nằm cạnh Nhà thờ Đức Bà.",
+    "latitude": 10.7799,
+    "longitude": 106.7
+  },
+  {
+    "id": "nguyen_hue_walking_street",
+    "name": "Phố đi bộ Nguyễn Huệ",
+    "category": "public_space",
+    "description": "Không gian đi bộ và tổ chức sự kiện ở trung tâm thành phố.",
+    "latitude": 10.7742,
+    "longitude": 106.7035
+  },
+  {
+    "id": "bach_dang_wharf",
+    "name": "Bến Bạch Đằng",
+    "category": "riverfront",
+    "description": "Công viên ven sông Sài Gòn với tầm nhìn thoáng rộng.",
+    "latitude": 10.7737,
+    "longitude": 106.7061
+  },
+  {
+    "id": "saigon_opera_house",
+    "name": "Nhà hát Thành phố",
+    "category": "culture",
+    "description": "Nhà hát kiến trúc Pháp tại Công trường Lam Sơn.",
+    "latitude": 10.7765,
+    "longitude": 106.703
+  },
+  {
+    "id": "ho_chi_minh_city_museum",
+    "name": "Bảo tàng Thành phố Hồ Chí Minh",
+    "category": "museum",
+    "description": "Bảo tàng trong tòa nhà cổ trên đường Lý Tự Trọng.",
+    "latitude": 10.7759,
+    "longitude": 106.6999
+  },
+  {
+    "id": "tao_dan_park",
+    "name": "Công viên Tao Đàn",
+    "category": "park",
+    "description": "Mảng xanh lớn gần khu trung tâm và Dinh Độc Lập.",
+    "latitude": 10.774,
+    "longitude": 106.692
+  },
+  {
+    "id": "book_street",
+    "name": "Đường sách Thành phố Hồ Chí Minh",
+    "category": "culture",
+    "description": "Không gian sách và văn hóa trên đường Nguyễn Văn Bình.",
+    "latitude": 10.7803,
+    "longitude": 106.6996
+  },
+  {
+    "id": "vincom_center",
+    "name": "Vincom Center Đồng Khởi",
+    "category": "shopping",
+    "description": "Trung tâm mua sắm trên trục Đồng Khởi.",
+    "latitude": 10.7782,
+    "longitude": 106.7019
+  },
+  {
+    "id": "saigon_centre",
+    "name": "Saigon Centre",
+    "category": "shopping",
+    "description": "Trung tâm thương mại trên đường Lê Lợi.",
+    "latitude": 10.7734,
+    "longitude": 106.7003
+  },
+  {
+    "id": "bitexco_financial_tower",
+    "name": "Bitexco Financial Tower",
+    "category": "architecture",
+    "description": "Tòa tháp cao tầng nổi bật gần phố đi bộ Nguyễn Huệ.",
+    "latitude": 10.7717,
+    "longitude": 106.7043
+  },
+  {
+    "id": "le_van_tam_park",
+    "name": "Công viên Lê Văn Tám",
+    "category": "park",
+    "description": "Công viên đô thị lớn trên đường Hai Bà Trưng.",
+    "latitude": 10.7882,
+    "longitude": 106.693
+  },
+  {
+    "id": "fine_arts_museum",
+    "name": "Bảo tàng Mỹ thuật",
+    "category": "museum",
+    "description": "Không gian trưng bày mỹ thuật trong công trình kiến trúc cổ.",
+    "latitude": 10.77,
+    "longitude": 106.6999
+  },
+  {
+    "id": "tan_dinh_church",
+    "name": "Nhà thờ Tân Định",
+    "category": "architecture",
+    "description": "Nhà thờ màu hồng nổi bật trên đường Hai Bà Trưng.",
+    "latitude": 10.7881,
+    "longitude": 106.6908
+  },
+  {
+    "id": "southern_womens_museum",
+    "name": "Bảo tàng Phụ nữ Nam Bộ",
+    "category": "museum",
+    "description": "Bảo tàng giới thiệu lịch sử và văn hóa phụ nữ Nam Bộ.",
+    "latitude": 10.7872,
+    "longitude": 106.6905
+  },
+  {
+    "id": "turtle_lake",
+    "name": "Hồ Con Rùa",
+    "category": "public_space",
+    "description": "Điểm sinh hoạt công cộng tại Công trường Quốc tế.",
+    "latitude": 10.7827,
+    "longitude": 106.6968
+  },
+  {
+    "id": "diamond_plaza",
+    "name": "Diamond Plaza",
+    "category": "shopping",
+    "description": "Trung tâm mua sắm gần khu Nhà thờ Đức Bà.",
+    "latitude": 10.781,
+    "longitude": 106.6987
+  },
+  {
+    "id": "saigon_zoo",
+    "name": "Thảo Cầm Viên Sài Gòn",
+    "category": "park",
+    "description": "Vườn thú và vườn thực vật lâu đời của thành phố.",
+    "latitude": 10.7873,
+    "longitude": 106.7054
+  },
+  {
+    "id": "city_hall",
+    "name": "Trụ sở Ủy ban Nhân dân Thành phố",
+    "category": "architecture",
+    "description": "Công trình kiến trúc lịch sử ở đầu phố đi bộ Nguyễn Huệ.",
+    "latitude": 10.7767,
+    "longitude": 106.7009
+  },
+  {
+    "id": "vinh_nghiem_pagoda",
+    "name": "Chùa Vĩnh Nghiêm",
+    "category": "culture",
+    "description": "Ngôi chùa lớn với kiến trúc Phật giáo nổi bật trên đường Nam Kỳ Khởi Nghĩa.",
+    "latitude": 10.7905,
+    "longitude": 106.6822
+  },
+  {
+    "id": "youth_cultural_house",
+    "name": "Nhà Văn hóa Thanh niên",
+    "category": "culture",
+    "description": "Không gian sinh hoạt văn hóa gần Hồ Con Rùa.",
+    "latitude": 10.7832,
+    "longitude": 106.6958
+  }
+]

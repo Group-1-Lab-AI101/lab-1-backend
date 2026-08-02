@@ -1,0 +1,231 @@
+{
+  "description": "Small hybrid demo graph. This is not the group's final 20-node dataset.",
+  "nodes": {
+    "ben_thanh_market": {
+      "display_name": "Chợ Bến Thành",
+      "latitude": 10.7725,
+      "longitude": 106.698
+    },
+    "independence_palace": {
+      "display_name": "Dinh Độc Lập",
+      "latitude": 10.777,
+      "longitude": 106.6953
+    },
+    "war_remnants_museum": {
+      "display_name": "Bảo tàng Chứng tích Chiến tranh",
+      "latitude": 10.7795,
+      "longitude": 106.692
+    },
+    "notre_dame_cathedral": {
+      "display_name": "Nhà thờ Đức Bà",
+      "latitude": 10.7798,
+      "longitude": 106.699
+    },
+    "central_post_office": {
+      "display_name": "Bưu điện Trung tâm",
+      "latitude": 10.7799,
+      "longitude": 106.7
+    },
+    "saigon_zoo": {
+      "display_name": "Thảo Cầm Viên",
+      "latitude": 10.7873,
+      "longitude": 106.7054
+    },
+    "bach_dang_wharf": {
+      "display_name": "Bến Bạch Đằng",
+      "latitude": 10.7737,
+      "longitude": 106.7061
+    },
+    "nguyen_hue_walking_street": {
+      "display_name": "Phố đi bộ Nguyễn Huệ",
+      "latitude": 10.7742,
+      "longitude": 106.7035
+    },
+    "tan_dinh_church": {
+      "display_name": "Nhà thờ Tân Định",
+      "latitude": 10.7881,
+      "longitude": 106.6908
+    },
+    "unreachable_landmark": {
+      "display_name": "Điểm thử không thể đến",
+      "latitude": 10.8,
+      "longitude": 106.72
+    }
+  },
+  "adjacency": {
+    "ben_thanh_market": [
+      {
+        "to": "independence_palace",
+        "distance_km": 1.0,
+        "time_min": 7.0,
+        "congestion": 5.0,
+        "risk": 0.5,
+        "road_type": "urban_primary",
+        "metadata": {
+          "direction": "one_way"
+        }
+      },
+      {
+        "to": "nguyen_hue_walking_street",
+        "distance_km": 1.3,
+        "time_min": 5.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      }
+    ],
+    "independence_palace": [
+      {
+        "to": "war_remnants_museum",
+        "distance_km": 0.8,
+        "time_min": 5.0,
+        "congestion": 3.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "notre_dame_cathedral",
+        "distance_km": 1.0,
+        "time_min": 6.0,
+        "congestion": 4.0,
+        "risk": 0.0,
+        "road_type": "urban_primary"
+      }
+    ],
+    "war_remnants_museum": [
+      {
+        "to": "independence_palace",
+        "distance_km": 0.8,
+        "time_min": 5.0,
+        "congestion": 3.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "tan_dinh_church",
+        "distance_km": 1.4,
+        "time_min": 7.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      }
+    ],
+    "notre_dame_cathedral": [
+      {
+        "to": "central_post_office",
+        "distance_km": 0.2,
+        "time_min": 2.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "local"
+      },
+      {
+        "to": "independence_palace",
+        "distance_km": 1.0,
+        "time_min": 6.0,
+        "congestion": 4.0,
+        "risk": 0.0,
+        "road_type": "urban_primary"
+      }
+    ],
+    "central_post_office": [
+      {
+        "to": "notre_dame_cathedral",
+        "distance_km": 0.2,
+        "time_min": 2.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "local"
+      },
+      {
+        "to": "saigon_zoo",
+        "distance_km": 1.5,
+        "time_min": 7.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      }
+    ],
+    "saigon_zoo": [
+      {
+        "to": "central_post_office",
+        "distance_km": 1.5,
+        "time_min": 7.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "bach_dang_wharf",
+        "distance_km": 2.2,
+        "time_min": 10.0,
+        "congestion": 3.0,
+        "risk": 0.5,
+        "road_type": "urban_primary"
+      }
+    ],
+    "bach_dang_wharf": [
+      {
+        "to": "nguyen_hue_walking_street",
+        "distance_km": 0.8,
+        "time_min": 4.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "saigon_zoo",
+        "distance_km": 2.2,
+        "time_min": 10.0,
+        "congestion": 3.0,
+        "risk": 0.5,
+        "road_type": "urban_primary"
+      }
+    ],
+    "nguyen_hue_walking_street": [
+      {
+        "to": "ben_thanh_market",
+        "distance_km": 1.3,
+        "time_min": 5.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "bach_dang_wharf",
+        "distance_km": 0.8,
+        "time_min": 4.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "central_post_office",
+        "distance_km": 1.1,
+        "time_min": 5.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      }
+    ],
+    "tan_dinh_church": [
+      {
+        "to": "war_remnants_museum",
+        "distance_km": 1.4,
+        "time_min": 7.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      },
+      {
+        "to": "saigon_zoo",
+        "distance_km": 2.0,
+        "time_min": 9.0,
+        "congestion": 2.0,
+        "risk": 0.0,
+        "road_type": "urban_secondary"
+      }
+    ],
+    "unreachable_landmark": []
+  }
+}

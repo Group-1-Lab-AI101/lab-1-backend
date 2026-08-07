@@ -1,0 +1,217 @@
+{
+  "network_summary": {
+    "generated_at": "2026-07-11T15:19:26.905576+00:00",
+    "osmnx_version": "2.1.0",
+    "network_type": "drive",
+    "relations": [
+      "19260504",
+      "19260546"
+    ],
+    "total_roads": 1075,
+    "total_intersections": 519,
+    "total_road_length_km": 95.083,
+    "per_relation": [
+      {
+        "relation_id": "19260504",
+        "roads": 609,
+        "intersections": 291,
+        "total_road_length_m": 50253.42
+      },
+      {
+        "relation_id": "19260546",
+        "roads": 466,
+        "intersections": 228,
+        "total_road_length_m": 44830.06
+      }
+    ],
+    "errors": [],
+    "routable_nodes": 481,
+    "routable_edges": 995,
+    "landmarks": 24,
+    "unique_landmark_nodes": 24,
+    "simulated_connectors": 2,
+    "source": "OpenStreetMap via the group's osmnx-tools repository"
+  },
+  "repeats": 10,
+  "algorithm_case": {
+    "start": "notre_dame_cathedral",
+    "goal": "saigon_zoo",
+    "criterion": "balanced",
+    "traffic_profile": "normal",
+    "results": [
+      {
+        "algorithm": "bfs",
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 206,
+        "generated_nodes": 226,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.8903499983716756,
+        "optimality": "optimal_by_edge_count"
+      },
+      {
+        "algorithm": "dfs",
+        "total_cost": 35.767623763117214,
+        "total_distance_km": 7.598251899620317,
+        "total_time_min": 9.733429658742246,
+        "expanded_nodes": 150,
+        "generated_nodes": 183,
+        "path_nodes": 77,
+        "median_runtime_ms": 0.9815999947022647,
+        "optimality": "not_guaranteed"
+      },
+      {
+        "algorithm": "ucs",
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 218,
+        "generated_nodes": 244,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.29370000993367285,
+        "optimality": "optimal"
+      },
+      {
+        "algorithm": "astar",
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 172,
+        "generated_nodes": 192,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.5700000037904829,
+        "optimality": "optimal_with_admissible_heuristic"
+      },
+      {
+        "algorithm": "dijkstra",
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 218,
+        "generated_nodes": 244,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.29155000811442733,
+        "optimality": "optimal"
+      },
+      {
+        "algorithm": "greedy",
+        "total_cost": 7.738303435011284,
+        "total_distance_km": 1.4215833620101272,
+        "total_time_min": 1.9418001825028917,
+        "expanded_nodes": 19,
+        "generated_nodes": 37,
+        "path_nodes": 19,
+        "median_runtime_ms": 0.1346500066574663,
+        "optimality": "not_guaranteed"
+      }
+    ]
+  },
+  "traffic_case": {
+    "start": "ben_thanh_market",
+    "goal": "independence_palace",
+    "criterion": "balanced",
+    "results": [
+      {
+        "profile": "normal",
+        "total_cost": 9.365219656674707,
+        "total_distance_km": 2.139905585784919,
+        "total_time_min": 3.223285177224469,
+        "path_nodes": 21,
+        "road_names": [
+          "Pasteur",
+          "Alexandre de Rhodes",
+          "Phạm Ngọc Thạch",
+          "Nguyễn Văn Chiêm",
+          "Boundary connector",
+          "Hai Bà Trưng",
+          "Trần Cao Vân",
+          "Công trường Quốc tế",
+          "Võ Văn Tần",
+          "Nam Kỳ Khởi Nghĩa"
+        ]
+      },
+      {
+        "profile": "rush_hour",
+        "total_cost": 11.833619955831825,
+        "total_distance_km": 2.139905585784919,
+        "total_time_min": 5.394285925117264,
+        "path_nodes": 21,
+        "road_names": [
+          "Pasteur",
+          "Alexandre de Rhodes",
+          "Phạm Ngọc Thạch",
+          "Nguyễn Văn Chiêm",
+          "Boundary connector",
+          "Hai Bà Trưng",
+          "Trần Cao Vân",
+          "Công trường Quốc tế",
+          "Võ Văn Tần",
+          "Nam Kỳ Khởi Nghĩa"
+        ]
+      },
+      {
+        "profile": "rainy",
+        "total_cost": 13.184356326610411,
+        "total_distance_km": 2.1446198697842367,
+        "total_time_min": 4.409341142065432,
+        "path_nodes": 20,
+        "road_names": [
+          "Pasteur",
+          "Lý Tự Trọng",
+          "Hai Bà Trưng",
+          "Đường Hai Bà Trưng",
+          "Boundary connector",
+          "Trần Cao Vân",
+          "Công trường Quốc tế",
+          "Võ Văn Tần",
+          "Nam Kỳ Khởi Nghĩa"
+        ]
+      }
+    ]
+  },
+  "multi_case": {
+    "start": "notre_dame_cathedral",
+    "requested_waypoints": [
+      "ben_thanh_market",
+      "nguyen_hue_walking_street",
+      "bach_dang_wharf",
+      "fine_arts_museum"
+    ],
+    "original_order": {
+      "total_cost": 12.259750724571774,
+      "total_distance_km": 2.689292552507194,
+      "total_time_min": 3.8161454301614484
+    },
+    "nearest_neighbor": {
+      "method": "nearest_neighbor",
+      "visiting_order": [
+        "nguyen_hue_walking_street",
+        "ben_thanh_market",
+        "fine_arts_museum",
+        "bach_dang_wharf"
+      ],
+      "total_cost": 13.56548971060786,
+      "total_distance_km": 3.194127728166091,
+      "total_time_min": 5.748404956104423,
+      "runtime_ms": 28.358899988234043,
+      "comparison_gap_percent": 20.875559333706672,
+      "optimality": "approximate_not_guaranteed"
+    },
+    "exact_bruteforce": {
+      "method": "exact_bruteforce",
+      "visiting_order": [
+        "nguyen_hue_walking_street",
+        "fine_arts_museum",
+        "ben_thanh_market",
+        "bach_dang_wharf"
+      ],
+      "total_cost": 11.222690331597137,
+      "total_distance_km": 2.5520082104818367,
+      "total_time_min": 3.646705302788248,
+      "runtime_ms": 6.381600018357858,
+      "comparison_gap_percent": 0.0,
+      "optimality": "optimal_for_reduced_pairwise_problem"
+    }
+  }
+}

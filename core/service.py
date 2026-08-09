@@ -15,6 +15,11 @@ from algorithms import (
 )
 from core.contracts import Edge, SearchResult, SearchStep, StepCallback
 from core.cost import WeightedCostFunction
+from core.explanation import (
+    explain_search_result,
+    route_segments,
+    summarize_comparison,
+)
 from core.heuristic import HaversineHeuristic
 from core.multi_location import (
     compare_multi_location_methods,

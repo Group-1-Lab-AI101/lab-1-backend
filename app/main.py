@@ -17,6 +17,9 @@ from core.service import RoutePlanner
 
 
 planner = RoutePlanner()
+STREAM_EXPAND_SAMPLE_RATE = 5
+STREAM_VISITED_LIMIT = 120
+STREAM_FRONTIER_LIMIT = 80
 app = FastAPI(
     title="Saigon Route Lab API",
     description="Search algorithms for a multi-landmark Ho Chi Minh City route planner.",
@@ -137,11 +140,30 @@ async def search_websocket(websocket: WebSocket) -> None:
         await websocket.send_json({"type": "started", "algorithm": request.algorithm})
         event_loop = asyncio.get_running_loop()
         step_queue: asyncio.Queue[dict[str, Any]] = asyncio.Queue()
+        expand_count = 0
 
         def publish_step(step) -> None:
+            nonlocal expand_count
+            if step.event == "expand":
+                expand_count += 1
+                if expand_count != 1 and expand_count % STREAM_EXPAND_SAMPLE_RATE:
+                    return
+            elif step.event != "goal":
+                return
+            step_payload = step.to_dict()
+            visited_count = len(step_payload["visited"])
+            frontier_count = len(step_payload["frontier"])
+            step_payload["visited"] = step_payload["visited"][-STREAM_VISITED_LIMIT:]
+            step_payload["frontier"] = step_payload["frontier"][:STREAM_FRONTIER_LIMIT]
+            step_payload["details"] = {
+                **step_payload["details"],
+                "visited_count": visited_count,
+                "frontier_count": frontier_count,
+                "sample_rate": STREAM_EXPAND_SAMPLE_RATE,
+            }
             event_loop.call_soon_threadsafe(
                 step_queue.put_nowait,
-                {"type": "step", "step": step.to_dict()},
+                {"type": "step", "step": step_payload},
             )
 
         worker = asyncio.create_task(

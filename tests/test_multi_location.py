@@ -101,6 +101,37 @@ class MultiLocationTests(unittest.TestCase):
             result.optimality, "optimal_for_reduced_pairwise_problem"
         )
 
+    def test_held_karp_matches_bruteforce_optimum(self) -> None:
+        graph = comparison_graph()
+        dynamic = optimize_multi_location(
+            graph, "S", ["A", "B", "C"], metadata_cost, method="held_karp"
+        )
+        brute_force = optimize_multi_location(
+            graph,
+            "S",
+            ["A", "B", "C"],
+            metadata_cost,
+            method="exact_bruteforce",
+        )
+        self.assertTrue(dynamic.success)
+        self.assertEqual(dynamic.visiting_order, brute_force.visiting_order)
+        self.assertTrue(
+            math.isclose(dynamic.total_cost or -1, brute_force.total_cost or -2)
+        )
+        self.assertEqual(
+            dynamic.optimality, "optimal_for_reduced_pairwise_problem"
+        )
+
+    def test_held_karp_limit_is_enforced(self) -> None:
+        nodes = [f"W{index}" for index in range(13)]
+        graph = {"S": [edge(node, 1) for node in nodes]}
+        for source in nodes:
+            graph[source] = [edge(target, 1) for target in nodes if target != source]
+        with self.assertRaisesRegex(ValueError, "at most 12"):
+            optimize_multi_location(
+                graph, "S", nodes, metadata_cost, method="held_karp"
+            )
+
     def test_exact_limit_is_enforced(self) -> None:
         with self.assertRaisesRegex(ValueError, "nearest_neighbor"):
             optimize_multi_location(

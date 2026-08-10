@@ -8,16 +8,16 @@
   "heuristic_checks": {
     "presets": 5,
     "goals": 24,
-    "directed_edges": 995,
+    "directed_edges": 3649,
     "consistency_violations": 0,
     "max_consistency_excess": 0.0
   },
-  "pairs_changed_by_traffic_profile": 177,
-  "pairs_changed_by_cost_criterion": 343,
+  "pairs_changed_by_traffic_profile": 82,
+  "pairs_changed_by_cost_criterion": 351,
   "landmark_access_offsets_m": {
-    "mean": 101.78750000000001,
-    "maximum": 383.5,
-    "over_100_m": 6
+    "mean": 8.016666666666667,
+    "maximum": 29.9,
+    "over_100_m": 0
   },
-  "elapsed_seconds": 7.557180261000212
+  "elapsed_seconds": 33.03932289999648
 }

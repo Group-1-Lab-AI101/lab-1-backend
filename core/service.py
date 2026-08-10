@@ -420,7 +420,18 @@ class RoutePlanner:
             comparison = compare_multi_location_methods(
                 graph, start.snapped_node, waypoint_nodes, cost_fn, **common
             )
-            result = comparison[method]
+            result = (
+                comparison[method]
+                if method in comparison
+                else optimize_multi_location(
+                    graph,
+                    start.snapped_node,
+                    waypoint_nodes,
+                    cost_fn,
+                    method=method,
+                    **common,
+                )
+            )
             comparison_payload = {
                 name: item.to_dict() for name, item in comparison.items()
             }
@@ -443,6 +454,11 @@ class RoutePlanner:
             for node in result.visiting_order
             if node in landmark_by_node
         ]
+        segments = (
+            route_segments(graph, result.full_path, cost_fn)
+            if result.success
+            else []
+        )
         return {
             "request": {
                 "start": start.to_dict(),
@@ -457,6 +473,7 @@ class RoutePlanner:
             "result": result.to_dict(),
             "visiting_landmarks": visiting_landmarks,
             "route_geojson": self.network.route_geojson(result.full_path),
+            "route_segments": segments,
             "comparison": comparison_payload,
             "explanation": {
                 "headline": (

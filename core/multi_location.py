@@ -19,7 +19,8 @@ from core.contracts import (
 )
 
 
-SUPPORTED_METHODS = {"nearest_neighbor", "exact_bruteforce"}
+HELD_KARP_LIMIT = 12
+SUPPORTED_METHODS = {"nearest_neighbor", "exact_bruteforce", "held_karp"}
 
 
 @dataclass
@@ -447,6 +448,168 @@ def _exact_bruteforce(
     )
 
 
+def _held_karp(
+    request: _Request, router: _PairwiseRouter
+) -> MultiLocationResult:
+    """Find an exact pairwise waypoint order with dynamic programming."""
+    if len(request.requested_waypoints) > HELD_KARP_LIMIT:
+        raise ValueError(
+            f"held_karp supports at most {HELD_KARP_LIMIT} waypoints; "
+            "use method='nearest_neighbor' for larger inputs"
+        )
+
+    started_at = time.perf_counter()
+    fixed_end_is_waypoint = (
+        request.end is not None and request.end in request.requested_waypoints
+    )
+    waypoint_targets = [
+        waypoint
+        for waypoint in request.requested_waypoints
+        if not fixed_end_is_waypoint or waypoint != request.end
+    ]
+    target_count = len(waypoint_targets)
+    best_target_order: list[str] = []
+    first_unreachable: tuple[str, str] | None = None
+
+    if target_count:
+        costs: dict[tuple[int, int], float] = {}
+        parents: dict[tuple[int, int], int | None] = {}
+        for index, target in enumerate(waypoint_targets):
+            result = router.get(request.start, target)
+            if not result.success or result.total_cost is None:
+                if first_unreachable is None:
+                    first_unreachable = (request.start, target)
+                continue
+            state = (1 << index, index)
+            costs[state] = result.total_cost
+            parents[state] = None
+
+        for mask in range(1, 1 << target_count):
+            for last_index in range(target_count):
+                state = (mask, last_index)
+                if state not in costs:
+                    continue
+                for next_index in range(target_count):
+                    if mask & (1 << next_index):
+                        continue
+                    result = router.get(
+                        waypoint_targets[last_index], waypoint_targets[next_index]
+                    )
+                    if not result.success or result.total_cost is None:
+                        if first_unreachable is None:
+                            first_unreachable = (
+                                waypoint_targets[last_index],
+                                waypoint_targets[next_index],
+                            )
+                        continue
+                    next_state = (mask | (1 << next_index), next_index)
+                    candidate = costs[state] + result.total_cost
+                    if candidate < costs.get(next_state, float("inf")):
+                        costs[next_state] = candidate
+                        parents[next_state] = last_index
+
+        full_mask = (1 << target_count) - 1
+        best_state: tuple[int, int] | None = None
+        best_cost: float | None = None
+        final_target = (
+            request.start if request.return_to_start else request.end
+        )
+        for last_index in range(target_count):
+            state = (full_mask, last_index)
+            if state not in costs:
+                continue
+            candidate = costs[state]
+            if final_target is not None and final_target != waypoint_targets[last_index]:
+                result = router.get(waypoint_targets[last_index], final_target)
+                if not result.success or result.total_cost is None:
+                    if first_unreachable is None:
+                        first_unreachable = (
+                            waypoint_targets[last_index], final_target
+                        )
+                    continue
+                candidate += result.total_cost
+            if best_cost is None or candidate < best_cost:
+                best_cost = candidate
+                best_state = state
+
+        if best_state is None:
+            source, target = first_unreachable or (
+                request.start, waypoint_targets[0]
+            )
+            return _failure_result(
+                request,
+                "held_karp",
+                started_at,
+                f"Required segment is unreachable: {source!r} -> {target!r}.",
+            )
+
+        mask, last_index = best_state
+        reversed_indices: list[int] = []
+        while True:
+            reversed_indices.append(last_index)
+            previous = parents[(mask, last_index)]
+            if previous is None:
+                break
+            mask ^= 1 << last_index
+            last_index = previous
+        best_target_order = [
+            waypoint_targets[index] for index in reversed(reversed_indices)
+        ]
+
+    visiting_order: list[str] = []
+    visited_waypoints: set[str] = set()
+    segments: list[RouteSegment] = []
+    route_targets = [(target, False) for target in best_target_order]
+    if request.end is not None:
+        route_targets.append((request.end, True))
+    if request.return_to_start and (
+        not route_targets or route_targets[-1][0] != request.start
+    ):
+        route_targets.append((request.start, True))
+
+    current = request.start
+    for target, is_required_endpoint in route_targets:
+        if not is_required_endpoint and target in visited_waypoints:
+            continue
+        if current == target:
+            _record_waypoint_visits(
+                [current], request.requested_waypoints, visiting_order, visited_waypoints
+            )
+            continue
+        result = router.get(current, target)
+        if not result.success:
+            return _failure_result(
+                request,
+                "held_karp",
+                started_at,
+                f"Required segment is unreachable: {current!r} -> {target!r}.",
+                visiting_order,
+                segments,
+            )
+        segment = _segment_from_search(result)
+        segments.append(segment)
+        _record_waypoint_visits(
+            segment.path,
+            request.requested_waypoints,
+            visiting_order,
+            visited_waypoints,
+        )
+        current = target
+
+    if len(visited_waypoints) != len(request.requested_waypoints):
+        return _failure_result(
+            request,
+            "held_karp",
+            started_at,
+            "No feasible visiting order covers every required waypoint.",
+            visiting_order,
+            segments,
+        )
+    return _success_result(
+        request, "held_karp", visiting_order, segments, started_at
+    )
+
+
 def _run_method(
     request: _Request, method: str, router: _PairwiseRouter
 ) -> MultiLocationResult:
@@ -454,6 +617,8 @@ def _run_method(
         return _nearest_neighbor(request, router)
     if method == "exact_bruteforce":
         return _exact_bruteforce(request, router)
+    if method == "held_karp":
+        return _held_karp(request, router)
     supported = ", ".join(sorted(SUPPORTED_METHODS))
     raise ValueError(f"Unknown method {method!r}; expected one of: {supported}")
 
@@ -476,7 +641,7 @@ def optimize_multi_location(
         start: Existing route start node.
         waypoints: Required nodes; duplicates and ``start`` are stably removed.
         cost_fn: Callable returning finite, non-negative edge costs.
-        method: ``nearest_neighbor`` or ``exact_bruteforce``.
+        method: ``nearest_neighbor``, ``exact_bruteforce``, or ``held_karp``.
         end: Optional fixed node to reach after all waypoints.
         return_to_start: Whether to append a final route back to ``start``.
         exact_limit: Maximum normalized waypoint count for brute force.

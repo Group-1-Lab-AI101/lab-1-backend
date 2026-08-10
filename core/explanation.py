@@ -57,6 +57,10 @@ def route_segments(
                 "risk": edge.risk,
                 "cost": cost_fn(source, edge),
                 "oneway": bool(edge.metadata.get("oneway", False)),
+                "geometry": [
+                    list(point[:2])
+                    for point in (edge.metadata.get("geometry") or [])
+                ],
             }
         )
     return details

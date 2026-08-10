@@ -78,12 +78,17 @@ def a_star_search(
     while frontier:
         priority, counter, current = heapq.heappop(frontier)
         current_g = queued_g.pop(counter)
+        current_details = {
+            "g": current_g,
+            "h": max(0.0, priority - current_g),
+            "f": priority,
+        }
         emitter.emit(
             "pop",
             current,
             frontier,
             visited_order,
-            {"g": current_g, "f": priority},
+            current_details,
         )
         if current_g > g_score[current] or current_g >= expanded_best.get(
             current, float("inf")
@@ -104,7 +109,7 @@ def a_star_search(
             current,
             frontier,
             visited_order,
-            {"g": current_g, "f": priority},
+            current_details,
         )
         if current == goal:
             success = True
@@ -113,7 +118,7 @@ def a_star_search(
                 current,
                 frontier,
                 visited_order,
-                {"g": current_g, "f": priority},
+                current_details,
             )
             break
 

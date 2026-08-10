@@ -102,6 +102,11 @@ class OtherAlgorithmTests(unittest.TestCase):
         )
         relax = next(step for step in result.trace if step.event == "relax")
         self.assertTrue({"g", "h", "f"}.issubset(relax.details))
+        expand = next(step for step in result.trace if step.event == "expand")
+        self.assertTrue({"g", "h", "f"}.issubset(expand.details))
+        self.assertAlmostEqual(
+            expand.details["f"], expand.details["g"] + expand.details["h"]
+        )
 
     def test_all_algorithms_return_unreachable_result(self) -> None:
         graph = {"A": [], "G": []}

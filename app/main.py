@@ -17,6 +17,10 @@ from core.service import RoutePlanner
 
 
 planner = RoutePlanner()
+# The teaching UI's Next button represents exactly one node expansion.
+# Payload size is still bounded by the visited/frontier windows below.
+STREAM_EXPAND_SAMPLE_RATE = 1
+STREAM_FRONTIER_LIMIT = 80
 app = FastAPI(
     title="Saigon Route Lab API",
     description="Search algorithms for a multi-landmark Ho Chi Minh City route planner.",
@@ -137,11 +141,38 @@ async def search_websocket(websocket: WebSocket) -> None:
         await websocket.send_json({"type": "started", "algorithm": request.algorithm})
         event_loop = asyncio.get_running_loop()
         step_queue: asyncio.Queue[dict[str, Any]] = asyncio.Queue()
+        expand_count = 0
 
         def publish_step(step) -> None:
+            nonlocal expand_count
+            # The algorithms emit a separate goal event immediately after the
+            # goal's expand event. Streaming only expand avoids a duplicate UI
+            # step, so every press of Next advances exactly one node.
+            if step.event != "expand":
+                return
+            expand_count += 1
+            if expand_count != 1 and expand_count % STREAM_EXPAND_SAMPLE_RATE:
+                return
+            step_payload = step.to_dict()
+            visited_count = len(step_payload["visited"])
+            frontier_count = len(step_payload["frontier"])
+            # Send only the newly expanded node. The browser accumulates these
+            # deltas for replay, avoiding repeated 120-node visited snapshots.
+            step_payload["visited_delta"] = (
+                [step.current_node] if step.current_node is not None else []
+            )
+            step_payload["visited"] = []
+            step_payload["frontier"] = step_payload["frontier"][:STREAM_FRONTIER_LIMIT]
+            step_payload["details"] = {
+                **step_payload["details"],
+                "visited_count": visited_count,
+                "frontier_count": frontier_count,
+                "sample_rate": STREAM_EXPAND_SAMPLE_RATE,
+                "visited_encoding": "delta",
+            }
             event_loop.call_soon_threadsafe(
                 step_queue.put_nowait,
-                {"type": "step", "step": step.to_dict()},
+                {"type": "step", "step": step_payload},
             )
 
         worker = asyncio.create_task(

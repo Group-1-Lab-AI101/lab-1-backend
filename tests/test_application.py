@@ -7,11 +7,7 @@ import unittest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from core.osm_loader import (
-    MAX_LANDMARK_ROAD_OFFSET_M,
-    apply_traffic_profile,
-    load_traffic_network,
-)
+from core.osm_loader import apply_traffic_profile, load_traffic_network
 from core.service import RoutePlanner
 
 
@@ -36,16 +32,6 @@ class OsmNetworkTests(unittest.TestCase):
             landmark.snapped_node for landmark in self.network.landmarks.values()
         ]
         self.assertEqual(len(snapped_nodes), len(set(snapped_nodes)))
-
-    def test_landmark_access_points_are_close_to_the_driving_graph(self) -> None:
-        for landmark in self.network.landmarks.values():
-            with self.subTest(landmark=landmark.id):
-                self.assertLessEqual(
-                    landmark.snapped_distance_m,
-                    MAX_LANDMARK_ROAD_OFFSET_M,
-                )
-                self.assertTrue(landmark.access_label)
-                self.assertTrue(landmark.access_road)
 
     def test_traffic_profile_returns_copy_and_changes_metrics(self) -> None:
         source = next(node for node, edges in self.network.graph.items() if edges)
@@ -188,31 +174,6 @@ class ApiTests(unittest.TestCase):
                     break
         self.assertIn("step", message_types)
         self.assertEqual(message_types[0], "started")
-
-    def test_websocket_bounds_large_graph_animation_payload(self) -> None:
-        steps: list[dict] = []
-        with self.client.websocket_connect("/ws/search") as websocket:
-            websocket.send_json(
-                {
-                    "start": "vinh_nghiem_pagoda",
-                    "goal": "bach_dang_wharf",
-                    "algorithm": "dijkstra",
-                }
-            )
-            while True:
-                message = websocket.receive_json()
-                if message["type"] == "step":
-                    steps.append(message["step"])
-                if message["type"] == "complete":
-                    self.assertTrue(message["payload"]["result"]["success"])
-                    break
-        self.assertGreater(len(steps), 1)
-        self.assertLess(len(steps), 400)
-        self.assertTrue(all(len(step["visited"]) <= 120 for step in steps))
-        self.assertTrue(all(len(step["frontier"]) <= 80 for step in steps))
-        self.assertTrue(
-            all("visited_count" in step["details"] for step in steps)
-        )
 
 
 if __name__ == "__main__":

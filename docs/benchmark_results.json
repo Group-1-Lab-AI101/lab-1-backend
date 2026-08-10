@@ -1,27 +1,36 @@
 {
   "network_summary": {
-    "generated_at": "2026-08-09T19:08:33.911368+00:00",
-    "osmnx_version": "2.1.1",
+    "generated_at": "2026-07-11T15:19:26.905576+00:00",
+    "osmnx_version": "2.1.0",
     "network_type": "drive",
-    "coverage": "continuous_landmark_bbox",
-    "bbox": [
-      106.67671332113547,
-      10.764572100597068,
-      106.71158667886453,
-      10.795927899402932
+    "relations": [
+      "19260504",
+      "19260546"
     ],
-    "buffer_m": 600.0,
-    "total_roads": 3740,
-    "total_intersections": 1713,
-    "total_road_length_km": 331.591,
-    "landmark_access_overrides": 12,
-    "source": "OpenStreetMap contributors via OSMnx",
+    "total_roads": 1075,
+    "total_intersections": 519,
+    "total_road_length_km": 95.083,
+    "per_relation": [
+      {
+        "relation_id": "19260504",
+        "roads": 609,
+        "intersections": 291,
+        "total_road_length_m": 50253.42
+      },
+      {
+        "relation_id": "19260546",
+        "roads": 466,
+        "intersections": 228,
+        "total_road_length_m": 44830.06
+      }
+    ],
     "errors": [],
-    "routable_nodes": 1662,
-    "routable_edges": 3649,
+    "routable_nodes": 481,
+    "routable_edges": 995,
     "landmarks": 24,
     "unique_landmark_nodes": 24,
-    "simulated_connectors": 0
+    "simulated_connectors": 2,
+    "source": "OpenStreetMap via the group's osmnx-tools repository"
   },
   "repeats": 10,
   "algorithm_case": {
@@ -32,68 +41,68 @@
     "results": [
       {
         "algorithm": "bfs",
-        "total_cost": 8.293493819616321,
-        "total_distance_km": 2.081647476257668,
-        "total_time_min": 3.019615858396631,
-        "expanded_nodes": 497,
-        "generated_nodes": 558,
-        "path_nodes": 18,
-        "median_runtime_ms": 7.076100002450403,
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 206,
+        "generated_nodes": 226,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.8903499983716756,
         "optimality": "optimal_by_edge_count"
       },
       {
         "algorithm": "dfs",
-        "total_cost": 64.04168138812246,
-        "total_distance_km": 13.14334920783835,
-        "total_time_min": 23.68583045071027,
-        "expanded_nodes": 1447,
-        "generated_nodes": 1531,
-        "path_nodes": 141,
-        "median_runtime_ms": 48.530700001720106,
+        "total_cost": 35.767623763117214,
+        "total_distance_km": 7.598251899620317,
+        "total_time_min": 9.733429658742246,
+        "expanded_nodes": 150,
+        "generated_nodes": 183,
+        "path_nodes": 77,
+        "median_runtime_ms": 0.9815999947022647,
         "optimality": "not_guaranteed"
       },
       {
         "algorithm": "ucs",
-        "total_cost": 8.293493819616321,
-        "total_distance_km": 2.081647476257668,
-        "total_time_min": 3.019615858396631,
-        "expanded_nodes": 528,
-        "generated_nodes": 606,
-        "path_nodes": 18,
-        "median_runtime_ms": 1.423049998265924,
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 218,
+        "generated_nodes": 244,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.29370000993367285,
         "optimality": "optimal"
       },
       {
         "algorithm": "astar",
-        "total_cost": 8.293493819616321,
-        "total_distance_km": 2.081647476257668,
-        "total_time_min": 3.019615858396631,
-        "expanded_nodes": 338,
-        "generated_nodes": 396,
-        "path_nodes": 18,
-        "median_runtime_ms": 1.2454499992600176,
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 172,
+        "generated_nodes": 192,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.5700000037904829,
         "optimality": "optimal_with_admissible_heuristic"
       },
       {
         "algorithm": "dijkstra",
-        "total_cost": 8.293493819616321,
-        "total_distance_km": 2.081647476257668,
-        "total_time_min": 3.019615858396631,
-        "expanded_nodes": 528,
-        "generated_nodes": 606,
-        "path_nodes": 18,
-        "median_runtime_ms": 0.8053499986999668,
+        "total_cost": 7.660784992914232,
+        "total_distance_km": 2.0460334041616624,
+        "total_time_min": 2.976878971881424,
+        "expanded_nodes": 218,
+        "generated_nodes": 244,
+        "path_nodes": 16,
+        "median_runtime_ms": 0.29155000811442733,
         "optimality": "optimal"
       },
       {
         "algorithm": "greedy",
-        "total_cost": 8.647012261713373,
-        "total_distance_km": 1.4571974341061331,
-        "total_time_min": 1.9845370690180988,
-        "expanded_nodes": 22,
-        "generated_nodes": 39,
-        "path_nodes": 22,
-        "median_runtime_ms": 0.1358500012429431,
+        "total_cost": 7.738303435011284,
+        "total_distance_km": 1.4215833620101272,
+        "total_time_min": 1.9418001825028917,
+        "expanded_nodes": 19,
+        "generated_nodes": 37,
+        "path_nodes": 19,
+        "median_runtime_ms": 0.1346500066574663,
         "optimality": "not_guaranteed"
       }
     ]
@@ -105,45 +114,57 @@
     "results": [
       {
         "profile": "normal",
-        "total_cost": 6.737432555712755,
-        "total_distance_km": 1.8129932564453108,
-        "total_time_min": 2.77109824816861,
-        "path_nodes": 14,
+        "total_cost": 9.365219656674707,
+        "total_distance_km": 2.139905585784919,
+        "total_time_min": 3.223285177224469,
+        "path_nodes": 21,
         "road_names": [
-          "Công trường Quách Thị Trang",
-          "Phan Chu Trinh",
-          "Nguyễn An Ninh",
-          "Trương Định",
-          "Nguyễn Thị Minh Khai",
+          "Pasteur",
+          "Alexandre de Rhodes",
+          "Phạm Ngọc Thạch",
+          "Nguyễn Văn Chiêm",
+          "Boundary connector",
+          "Hai Bà Trưng",
+          "Trần Cao Vân",
+          "Công trường Quốc tế",
+          "Võ Văn Tần",
           "Nam Kỳ Khởi Nghĩa"
         ]
       },
       {
         "profile": "rush_hour",
-        "total_cost": 8.438561193053893,
-        "total_distance_km": 1.8129932564453108,
-        "total_time_min": 4.423919841521455,
-        "path_nodes": 14,
+        "total_cost": 11.833619955831825,
+        "total_distance_km": 2.139905585784919,
+        "total_time_min": 5.394285925117264,
+        "path_nodes": 21,
         "road_names": [
-          "Công trường Quách Thị Trang",
-          "Phan Chu Trinh",
-          "Nguyễn An Ninh",
-          "Trương Định",
-          "Nguyễn Thị Minh Khai",
+          "Pasteur",
+          "Alexandre de Rhodes",
+          "Phạm Ngọc Thạch",
+          "Nguyễn Văn Chiêm",
+          "Boundary connector",
+          "Hai Bà Trưng",
+          "Trần Cao Vân",
+          "Công trường Quốc tế",
+          "Võ Văn Tần",
           "Nam Kỳ Khởi Nghĩa"
         ]
       },
       {
         "profile": "rainy",
-        "total_cost": 9.314897078904556,
-        "total_distance_km": 1.793249998713724,
-        "total_time_min": 3.1841177004770786,
-        "path_nodes": 14,
+        "total_cost": 13.184356326610411,
+        "total_distance_km": 2.1446198697842367,
+        "total_time_min": 4.409341142065432,
+        "path_nodes": 20,
         "road_names": [
-          "Công trường Quách Thị Trang",
-          "Lê Lai",
-          "Trương Định",
-          "Nguyễn Thị Minh Khai",
+          "Pasteur",
+          "Lý Tự Trọng",
+          "Hai Bà Trưng",
+          "Đường Hai Bà Trưng",
+          "Boundary connector",
+          "Trần Cao Vân",
+          "Công trường Quốc tế",
+          "Võ Văn Tần",
           "Nam Kỳ Khởi Nghĩa"
         ]
       }
@@ -158,37 +179,37 @@
       "fine_arts_museum"
     ],
     "original_order": {
-      "total_cost": 21.03776257406039,
-      "total_distance_km": 4.275712242989526,
-      "total_time_min": 7.765125827677162
+      "total_cost": 12.259750724571774,
+      "total_distance_km": 2.689292552507194,
+      "total_time_min": 3.8161454301614484
     },
     "nearest_neighbor": {
       "method": "nearest_neighbor",
       "visiting_order": [
+        "nguyen_hue_walking_street",
         "ben_thanh_market",
         "fine_arts_museum",
-        "nguyen_hue_walking_street",
         "bach_dang_wharf"
       ],
-      "total_cost": 17.640475209711934,
-      "total_distance_km": 3.384999078590403,
-      "total_time_min": 5.998690327803827,
-      "runtime_ms": 227.665700003854,
-      "comparison_gap_percent": 0.0,
+      "total_cost": 13.56548971060786,
+      "total_distance_km": 3.194127728166091,
+      "total_time_min": 5.748404956104423,
+      "runtime_ms": 28.358899988234043,
+      "comparison_gap_percent": 20.875559333706672,
       "optimality": "approximate_not_guaranteed"
     },
     "exact_bruteforce": {
       "method": "exact_bruteforce",
       "visiting_order": [
-        "ben_thanh_market",
-        "fine_arts_museum",
         "nguyen_hue_walking_street",
+        "fine_arts_museum",
+        "ben_thanh_market",
         "bach_dang_wharf"
       ],
-      "total_cost": 17.640475209711934,
-      "total_distance_km": 3.384999078590403,
-      "total_time_min": 5.998690327803827,
-      "runtime_ms": 48.07910000090487,
+      "total_cost": 11.222690331597137,
+      "total_distance_km": 2.5520082104818367,
+      "total_time_min": 3.646705302788248,
+      "runtime_ms": 6.381600018357858,
       "comparison_gap_percent": 0.0,
       "optimality": "optimal_for_reduced_pairwise_problem"
     }

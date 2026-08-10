@@ -1,19 +1,33 @@
 {
-  "generated_at": "2026-08-09T19:08:33.911368+00:00",
-  "osmnx_version": "2.1.1",
-  "network_type": "drive",
-  "coverage": "continuous_landmark_bbox",
-  "bbox": [
-    106.67671332113547,
-    10.764572100597068,
-    106.71158667886453,
-    10.795927899402932
+  "schema_version": "1.0.0",
+  "districts": [
+    {
+      "district_id": 1,
+      "district_name": "Quận 1"
+    },
+    {
+      "district_id": 3,
+      "district_name": "Quận 3"
+    }
   ],
-  "buffer_m": 600.0,
-  "total_roads": 3740,
-  "total_intersections": 1713,
-  "total_road_length_km": 331.591,
-  "landmark_access_overrides": 12,
-  "source": "OpenStreetMap contributors via OSMnx",
-  "errors": []
+  "scope": "Filtered from the available source extract. Road/intersection coverage is limited to Phường Sài Gòn và Phường Xuân Hòa, within the former Quận 1 và Quận 3 area; it is not the complete historic Quận 1 và Quận 3 road network.",
+  "counts": {
+    "roads_directed_features": 1075,
+    "intersections_source_nodes": 519,
+    "landmarks": 24,
+    "landmarks_within_source_coverage": 19,
+    "landmarks_outside_source_coverage": 5,
+    "roads_clipped_to_historic_boundary": 2
+  },
+  "road_length_km_topology_preserving": 95.083487,
+  "road_length_km_strict_clipped": 95.015204,
+  "source_coverage_relations": [
+    "19260504",
+    "19260546"
+  ],
+  "historic_boundary_relations": [
+    "2587287",
+    "3819816"
+  ],
+  "license": "OpenStreetMap data © OpenStreetMap contributors, ODbL 1.0"
 }

@@ -122,14 +122,15 @@ class GreedyBestFirstTests(unittest.TestCase):
             "A": [edge("B", 1), edge("C", 1)],
             "B": [edge("D", 1)],
             "C": [edge("D", 1)],
-            "D": [],
+            "D": [edge("G", 1)],
+            "G": [],
         }
-        heuristic = {"A": 2, "B": 1, "C": 1, "D": 0}
+        heuristic = {"A": 3, "B": 2, "C": 2, "D": 3, "G": 0}
         result = greedy_best_first(
-            graph, "A", "D", lambda node, _goal: heuristic[node], metadata_cost
+            graph, "A", "G", lambda node, _goal: heuristic[node], metadata_cost
         )
-        self.assertEqual(result.generated_nodes, 4)
-        self.assertEqual(result.path, ["A", "B", "D"])
+        self.assertEqual(result.generated_nodes, 5)
+        self.assertEqual(result.path, ["A", "B", "D", "G"])
 
     def test_callback_uses_shared_step_contract(self) -> None:
         events = []

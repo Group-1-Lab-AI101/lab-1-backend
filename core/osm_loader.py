@@ -15,7 +15,6 @@ from core.contracts import Edge, Graph
 
 DEFAULT_DATA_DIR = Path(__file__).resolve().parents[1] / "data" / "osm"
 DEFAULT_LANDMARKS_PATH = Path(__file__).resolve().parents[1] / "data" / "landmarks.json"
-MAX_LANDMARK_ROAD_OFFSET_M = 75.0
 
 ROAD_SPEED_KMH = {
     "motorway": 70.0,
@@ -79,12 +78,6 @@ class Landmark:
     description: str
     latitude: float
     longitude: float
-    routing_latitude: float
-    routing_longitude: float
-    access_kind: str
-    access_label: str
-    access_source: str
-    access_road: str
     snapped_node: str
     snapped_distance_m: float
 
@@ -97,12 +90,6 @@ class Landmark:
             "description": self.description,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "routing_latitude": self.routing_latitude,
-            "routing_longitude": self.routing_longitude,
-            "access_kind": self.access_kind,
-            "access_label": self.access_label,
-            "access_source": self.access_source,
-            "access_road": self.access_road,
             "snapped_node": self.snapped_node,
             "snapped_distance_m": self.snapped_distance_m,
         }
@@ -414,20 +401,13 @@ def _load_landmarks(
     for raw in raw_landmarks:
         latitude = float(raw["latitude"])
         longitude = float(raw["longitude"])
-        routing_latitude = float(raw.get("routing_latitude", latitude))
-        routing_longitude = float(raw.get("routing_longitude", longitude))
         if len(used_nodes) >= len(coordinates):
             raise ValueError("There are more landmarks than routable graph nodes")
         snapped_node, distance_km = min(
             (
                 (
                     node,
-                    _haversine_km(
-                        routing_latitude,
-                        routing_longitude,
-                        node_lat,
-                        node_lon,
-                    ),
+                    _haversine_km(latitude, longitude, node_lat, node_lon),
                 )
                 for node, (node_lat, node_lon) in coordinates.items()
                 if node not in used_nodes
@@ -441,21 +421,9 @@ def _load_landmarks(
             description=str(raw["description"]),
             latitude=latitude,
             longitude=longitude,
-            routing_latitude=routing_latitude,
-            routing_longitude=routing_longitude,
-            access_kind=str(raw.get("access_kind", "nearest_road")),
-            access_label=str(raw.get("access_label", "Nearest road access")),
-            access_source=str(raw.get("access_source", "Generated")),
-            access_road=str(raw.get("access_road", "Unnamed road")),
             snapped_node=snapped_node,
             snapped_distance_m=round(distance_km * 1000.0, 1),
         )
-        if landmark.snapped_distance_m > MAX_LANDMARK_ROAD_OFFSET_M:
-            raise ValueError(
-                f"Landmark {landmark.id!r} access point is "
-                f"{landmark.snapped_distance_m:.1f} m from the driving graph; "
-                f"maximum allowed is {MAX_LANDMARK_ROAD_OFFSET_M:.1f} m"
-            )
         if landmark.id in landmarks:
             raise ValueError(f"Duplicate landmark ID: {landmark.id!r}")
         landmarks[landmark.id] = landmark
@@ -499,9 +467,7 @@ def load_traffic_network(
                 for edge in edge_lookup.values()
                 if edge.metadata.get("simulated_connector")
             ),
-            "source": summary.get(
-                "source", "OpenStreetMap via the group's osmnx-tools repository"
-            ),
+            "source": "OpenStreetMap via the group's osmnx-tools repository",
         }
     )
     return TrafficNetwork(

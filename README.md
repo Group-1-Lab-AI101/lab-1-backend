@@ -5,9 +5,8 @@ route planner in Ho Chi Minh City.
 
 ## Included
 
-- Continuous OSM-derived driving graph: 1,662 routable nodes and 3,649 directed edges.
+- OSM-derived directed road graph: 481 routable nodes and 995 directed edges.
 - 24 landmarks snapped to the road graph.
-- Curated venue gates plus generated nearest-road access points.
 - BFS, DFS, Uniform Cost Search, A*, Dijkstra, and Greedy Best-First Search.
 - Weighted distance, time, congestion, and risk cost model.
 - Normal, rush-hour, and rainy traffic profiles.
@@ -34,13 +33,6 @@ Open `http://127.0.0.1:8000/docs` for the interactive API documentation.
 python -m unittest discover -s tests -v
 python examples\run_kiet_demo.py
 python examples\run_full_audit.py
-```
-
-Regenerate the OSM dataset with a 600 m buffer around every landmark:
-
-```powershell
-python -m pip install -r requirements-data.txt
-python scripts\generate_osm_data.py
 ```
 
 The test suite covers contracts, graph loading, all search algorithms,

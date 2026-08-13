@@ -12,7 +12,7 @@ CriterionName = Literal[
     "balanced", "fastest", "shortest", "low_congestion", "low_risk"
 ]
 TrafficProfileName = Literal["normal", "rush_hour", "rainy"]
-MultiMethodName = Literal["nearest_neighbor", "exact_bruteforce", "held_karp"]
+MultiMethodName = Literal["nearest_neighbor", "exact_bruteforce"]
 
 
 class CostWeights(BaseModel):

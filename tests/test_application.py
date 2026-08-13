@@ -158,26 +158,6 @@ class RoutePlannerTests(unittest.TestCase):
             all(segment["geometry"] for segment in payload["route_segments"])
         )
 
-    def test_held_karp_service_route_is_supported(self) -> None:
-        payload = self.planner.multi_route(
-            "fine_arts_museum",
-            [
-                "ben_thanh_market",
-                "nguyen_hue_walking_street",
-                "bach_dang_wharf",
-            ],
-            method="held_karp",
-            compare_methods=True,
-        )
-        self.assertTrue(payload["result"]["success"])
-        self.assertEqual(payload["result"]["method"], "held_karp")
-        self.assertEqual(
-            payload["result"]["optimality"],
-            "optimal_for_reduced_pairwise_problem",
-        )
-        self.assertIsNotNone(payload["comparison"])
-
-
 class ApiTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
